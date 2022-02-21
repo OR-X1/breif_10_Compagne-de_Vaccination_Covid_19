@@ -11,6 +11,7 @@ import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { Box, Button, Typography } from '@mui/material';
 
+import _ from "lodash";
 
 
 // stepp seting
@@ -101,9 +102,12 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 
 
+
+
+// const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = ['Dose', 'Add your Information',];
 
 
 export default function HorizontalLinearStepper() {
@@ -122,94 +126,109 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+
+
+
+  // dose ----------------------------------------------
   const [dose, setDose] = React.useState('');
-  const [effect, setEffect] = React.useState('');
+  const malades = [{ 'id':'malade 1'}, { 'id':'malade 2'}, { 'id':'malade 3'}, { 'id':'auther'}];
+  const traitements = ['traitement 1', 'traitement 2', 'traitement 3'];
 
-  const numbers = [
-                  `<p>step 1</p>`,
-                  `<p>step 2</p>`,
-                  `<p>step 3</p>`,
-                ];
- 
-  return (
-    <Box sx={{ width: '100%' }}>
+  const [malade, setMalade] = React.useState('null');
+  const [traitement, setTraitement] = React.useState('');
 
-      <Stack sx={{ width: '100%' }} spacing={4}>
-      
-      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Stack>
+  const [effect, setEffect] = React.useState('null');
 
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-        
-      ) : (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            
-            
-          
-          {/* { numbers[activeStep]} */}
-          
-          <br />
+const maladeValue = _.findIndex(malades, { 'id':malade} );
 
-          <form className='d-flex justify-content-evenly'>
-          <div class="mb-3 form-check">
-            <input 
-                  type="radio" 
-                  class="form-check-input" 
-                  value="dose1" 
-                  name="dose" 
-                  id="exampleCheck1"
-              onChange={(e) => setDose(e.target.value)}
-                  />
-            <label class="form-check-label" for="exampleCheck1">Dose 1</label>
-          </div>
-          <div class="mb-3 form-check">
-            <input 
-                  type="radio" 
-                  class="form-check-input" 
-                  value="dose2" 
-                  name="dose" 
-                  id="exampleCheck2"
-              onChange={(e) => setDose(e.target.value)}
-                  />
-            <label class="form-check-label" for="exampleCheck2">Dose 2</label>
-          </div>
-          <div class="mb-3 form-check">
-            <input 
-                  type="radio" 
-                  class="form-check-input" 
-                  value="dose3" 
-                  name="dose" 
-                  id="exampleCheck3"
-              onChange={(e) => setDose(e.target.value)}
-                  />
-            <label class="form-check-label" for="exampleCheck3">Dose 3</label>
-          </div>
+const [cin, setCin] = React.useState('');
+const [tel, setTel] = React.useState('');
+const [adress, setAdress] = React.useState('');
+const [email, setEmail] = React.useState('');
+
+
+const handleSubmit = () => {
+  console.log("submited");
+}
+
+console.log(maladeValue);
+console.log("traitement : "+traitement);
+
+
+
+  let numbers = '';
+  if(activeStep === 0){
+    numbers= (
+      <div>
+          <form  className=' mt-5 d-flex justify-content-evenly'>
+            <div class="mb-3 form-check">
+              <input 
+                    type="radio" 
+                    class="form-check-input" 
+                    value="dose1" 
+                    name="dose" 
+                    id="exampleCheck1"
+                onChange={(e) => setDose(e.target.value)}
+                    />
+              <label class="form-check-label" for="exampleCheck1">Dose 1</label>
+            </div>
+            <div class="mb-3 form-check">
+              <input 
+                    type="radio" 
+                    class="form-check-input" 
+                    value="dose2" 
+                    name="dose" 
+                    id="exampleCheck2"
+                onChange={(e) => setDose(e.target.value)}
+                    />
+              <label class="form-check-label" for="exampleCheck2">Dose 2</label>
+            </div>
+            <div class="mb-3 form-check">
+              <input 
+                    type="radio" 
+                    class="form-check-input" 
+                    value="dose3" 
+                    name="dose" 
+                    id="exampleCheck3"
+                onChange={(e) => setDose(e.target.value)}
+                    />
+              <label class="form-check-label" for="exampleCheck3">Dose 3</label>
+            </div>
           </form>
 
-          
           {(() => {
             if (dose === "dose1") {
               return (
-                <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-              </div>
+                <div className='m-5 d-flex justify-content-center'>
+                  <div className=' col-6'>
+                    <div class="mb-3">
+                      <select 
+                          className='form-select'
+                          value={ malade }
+                          onChange={(e) => setMalade(e.target.value)}>
+
+                          {malades.map((item , index) => (
+                            <option key={index} value={item.id}>{item.id}</option>
+                          ))}
+                      </select>
+                    </div>
+                    {malade === "auther" ? (
+                       <div class="mb-3">
+                        <label for="traitement" class="form-label">type traitement</label>
+                        
+                        <input type="text" class="form-control" id="traitement" aria-describedby="emailHelp" onChange={(e) => setTraitement(e.target.value)} value={traitement}/>
+                      </div>
+                    ) : (
+                      <div class="mb-3">
+                        <label for="traitement" class="form-label">traitement</label>
+                        
+                        <input type="text" disabled class="form-control" id="traitement" aria-describedby="emailHelp" onChange={(e) => setTraitement(e.target.value)} value={traitements[maladeValue]}/>
+                        
+                      </div>
+                    )}
+                    {traitement}
+                  </div>
+                </div>
               )
             } else if (dose === "dose2") {
               return (
@@ -221,7 +240,7 @@ export default function HorizontalLinearStepper() {
                             type="radio" 
                             class="form-check-input" 
                             value="no" 
-                            name="dose" 
+                            name="dose2" 
                             id="exampleCheckEffect1"
                         onChange={(e) => setEffect(e.target.value)}
                             />
@@ -232,14 +251,13 @@ export default function HorizontalLinearStepper() {
                             type="radio" 
                             class="form-check-input" 
                             value="yes" 
-                            name="dose" 
+                            name="dose2" 
                             id="exampleCheckEffect2"
                             onChange={(e) => setEffect(e.target.value)}
                             />
                       <label class="form-check-label" for="exampleCheckEffect2">Yes</label>
                     </div>
                   </form><br />
-
 
                   {(() => {
                     if(effect === "yes"){
@@ -273,7 +291,7 @@ export default function HorizontalLinearStepper() {
                             type="radio" 
                             class="form-check-input" 
                             value="no" 
-                            name="dose" 
+                            name="dose3" 
                             id="exampleCheckEffect3"
                         onChange={(e) => setEffect(e.target.value)}
                             />
@@ -284,7 +302,7 @@ export default function HorizontalLinearStepper() {
                             type="radio" 
                             class="form-check-input" 
                             value="yes" 
-                            name="dose" 
+                            name="dose3" 
                             id="exampleCheckEffect4"
                             onChange={(e) => setEffect(e.target.value)}
                             />
@@ -317,6 +335,68 @@ export default function HorizontalLinearStepper() {
               )
             }
         })()}
+      </div>
+    );
+  }else if(activeStep === 1){
+  numbers= (
+    <div className='my-5 d-flex justify-content-center'>
+      <form className='col-6'>
+            <div class="mb-3">
+              <label for="info1" class="form-label">CIN</label>
+              <input type="text" class="form-control" id="info1" aria-describedby="emailHelp" value={cin}  onChange={e => setCin(e.target.value)} />
+            </div>
+            <div class="mb-3">
+              <label for="info2" class="form-label">Tel</label>
+              <input type="number" class="form-control" id="info2" value={tel}  onChange={e => setTel(e.target.value)} />
+            </div>
+            <div class="mb-3">
+              <label for="info1" class="form-label">Adress</label>
+              <input type="text" class="form-control" id="info1" aria-describedby="emailHelp" value={adress}  onChange={e => setAdress(e.target.value)} />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email}  onChange={e => setEmail(e.target.value)} />
+            </div>
+          </form>
+    </div>
+  );
+  }
+  return (
+    <Box sx={{ width: '100%' }}>
+
+      <Stack sx={{ width: '100%' }} spacing={4}>
+      
+      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+    </Stack>
+
+      {activeStep === steps.length ? (
+        <React.Fragment>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            All steps completed - you&apos;re finished
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Button onClick={handleReset}>Reset</Button>
+          </Box>
+        </React.Fragment>
+        
+      ) : (
+        <React.Fragment>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            
+          {/* { numbers[activeStep]} */}
+
+          {numbers}
+
+          <br />
+
+          
 
           
 
@@ -345,7 +425,7 @@ export default function HorizontalLinearStepper() {
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
 
-            <button type="button" onClick={handleNext} class="btn btn-primary">
+            <button type="button" onClick={handleNext}   class="btn btn-primary">
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </button>
             {/* <Button onClick={handleNext}>
