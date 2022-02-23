@@ -19,11 +19,21 @@ const beneficiarySchema = new Schema({
     required: true
   },
   doses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "dose",
-    },
+      {nbr_dose: {
+        type: String,
+      },
+      effect: {
+        type: String,
+        default: null
+      }
+    }
   ],
+  // doses: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "dose",
+  //   },
+  // ],
   malade: {
     type: String,
     required: true

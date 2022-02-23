@@ -1,4 +1,6 @@
 import * as React from 'react';
+import axios from "axios";
+
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -114,8 +116,44 @@ export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
+    if(activeStep === steps.length - 1){
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        const form_data = {
+          cin: cin,
+          tel: tel,
+          email: email,
+          adress: adress,
+          nbr_dose:dose,
+          effect:effect,
+          malade: malade,
+          traitement: traitement
+          }
+
+        console.log(form_data);
+        setTimeout(() => {
+        axios.post('http://localhost:3000/api/user/store',form_data
+            ).then(response => {
+
+                if(response.data.result){
+                    console.log('good')
+                        // window.location.reload()
+                }else{
+                    console.log("error");
+                }
+
+            }).catch(error =>{
+                
+                console.log("error"+error);
+            }
+            )
+        }, 1000);
+
+      console.log("login");
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    }else{
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -139,7 +177,11 @@ export default function HorizontalLinearStepper() {
 
   const [effect, setEffect] = React.useState('null');
 
-const maladeValue = _.findIndex(malades, { 'id':malade} );
+  React.useEffect(()=>{
+    const maladeValue = _.findIndex(malades, { 'id':malade} );
+    setTraitement(traitements[maladeValue])
+  },[malade])
+
 
 const [cin, setCin] = React.useState('');
 const [tel, setTel] = React.useState('');
@@ -147,20 +189,15 @@ const [adress, setAdress] = React.useState('');
 const [email, setEmail] = React.useState('');
 
 
-const handleSubmit = () => {
-  console.log("submited");
-}
-
-console.log(maladeValue);
+// console.log(maladeValue);
 console.log("traitement : "+traitement);
-
 
 
   let numbers = '';
   if(activeStep === 0){
     numbers= (
       <div>
-          <form  className=' mt-5 d-flex justify-content-evenly'>
+          <form  className=' mt-5  d-flex justify-content-evenly'>
             <div class="mb-3 form-check">
               <input 
                     type="radio" 
@@ -208,7 +245,9 @@ console.log("traitement : "+traitement);
                           onChange={(e) => setMalade(e.target.value)}>
 
                           {malades.map((item , index) => (
+
                             <option key={index} value={item.id}>{item.id}</option>
+
                           ))}
                       </select>
                     </div>
@@ -222,7 +261,7 @@ console.log("traitement : "+traitement);
                       <div class="mb-3">
                         <label for="traitement" class="form-label">traitement</label>
                         
-                        <input type="text" disabled class="form-control" id="traitement" aria-describedby="emailHelp" onChange={(e) => setTraitement(e.target.value)} value={traitements[maladeValue]}/>
+                        <input type="text" disabled class="form-control" id="traitement" aria-describedby="emailHelp" onChange={(e) => setTraitement(e.target.value)} value={traitement}/>
                         
                       </div>
                     )}
