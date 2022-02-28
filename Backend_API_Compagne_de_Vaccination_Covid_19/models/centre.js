@@ -1,0 +1,25 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const centreSchema = new Schema({
+  
+  centre: {
+    type: String,
+    default: null
+  },
+  ville: {
+    type: String,
+    default: null
+  },
+  region_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "region"
+  },
+  respo_region_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "respo_region"
+  },
+}, { timestamps: true });
+
+const centre = mongoose.model('centre', centreSchema);
+module.exports = centre;

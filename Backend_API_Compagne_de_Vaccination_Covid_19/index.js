@@ -14,6 +14,7 @@ app.use(express.json());
 
 
 app.use('/api/user', require('./routes/beneficiary'));
+app.use('/api/resporegion', require('./routes/respo_region'));
 
 
 
