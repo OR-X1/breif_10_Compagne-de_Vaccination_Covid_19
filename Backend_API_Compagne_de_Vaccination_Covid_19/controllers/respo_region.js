@@ -45,8 +45,8 @@ exports.login = async (req, res) => {
                 })
             } else {
                 const id = login_respo._id;
-                const nom = login_respo.name;
-                const prenom = login_respo.lastname;
+                const nom = login_respo.nom;
+                const prenom = login_respo.prenom;
                 const email = login_respo.email;
                 const role = "respo_region";
                 const token = jwt.sign({
