@@ -10,6 +10,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Vaccination from "./pages/Vaccination";
 
+import Login from "./pages/DashAdmin/Login";
+import DashAdmin from "./pages/DashAdmin/DashAdmin";
+
 function App() {
   return (
     <div className="App">
@@ -20,6 +23,10 @@ function App() {
         <Routes>
           <Route  path="/"         element={<Index/>}/>
           <Route  path="/vaccination"         element={<Vaccination/>}/>
+
+
+          <Route  path="/resporegion"                   element={<DashAdmin/>}/>
+          <Route  path="/regionlogin"                   element={<Login/>}/> 
 
           <Route  path="*"         element={<NotFound/>}/> 
         </Routes>

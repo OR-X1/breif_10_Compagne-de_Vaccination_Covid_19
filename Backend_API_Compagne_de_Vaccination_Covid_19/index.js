@@ -1,8 +1,14 @@
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose');
+
+const dotenv = require('dotenv')
 var cors = require('cors')
 
+
+dotenv.config({
+  path: './.env'
+})
 
 
 const dbURI = "mongodb://127.0.0.1:27017/breif10_vaccination_covid_19";
