@@ -38,6 +38,7 @@ exports.login = async (req, res) => {
             email: email,
             // password: password
           })
+          
 
             if (!login_respo || !(await bcrypt.compareSync(password, login_respo.password))) {
                 return res.status(200).send({
@@ -45,10 +46,12 @@ exports.login = async (req, res) => {
                 })
             } else {
                 const id = login_respo._id;
-                const nom = login_respo.name;
-                const prenom = login_respo.lastname;
+                const nom = login_respo.nom;
+                const prenom = login_respo.prenom;
                 const email = login_respo.email;
                 const role = "respo_region";
+                
+                
                 const token = jwt.sign({
                     id,
                     nom,
@@ -58,10 +61,11 @@ exports.login = async (req, res) => {
                 }, process.env.JWT_SECRET, {
                     expiresIn: process.env.JWT_EXPIRE_IN
                 })
+                console.log(token);
                 return res.status(200).send({
                     msg: "lOGIN SUCCES",
+                    token: token,
                     data_login_respo: login_respo,
-                    token: token
                 })
             }
     } catch (error) {
