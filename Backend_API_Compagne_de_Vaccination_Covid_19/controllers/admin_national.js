@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
                 const nom = login_respo.nom;
                 const prenom = login_respo.prenom;
                 const email = login_respo.email;
-                const role = "respo_region";
+                const role = "admin";
                 
                 
                 const token = jwt.sign({
