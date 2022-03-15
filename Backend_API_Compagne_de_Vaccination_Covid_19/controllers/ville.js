@@ -1,8 +1,9 @@
-const Region = require("../models/region");
+const Ville = require("../models/ville");
 
-exports.getAllRegions = async (req, res) => {
 
-    Region.find()
+exports.getAllCities = async (req, res) => {
+
+    Ville.find()
           .then(result => {
             return res.status(200).json({
                 msg: "fetch all data",
@@ -13,4 +14,3 @@ exports.getAllRegions = async (req, res) => {
             console.log(err);
           });
 }
-

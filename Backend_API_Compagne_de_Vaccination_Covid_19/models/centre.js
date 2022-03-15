@@ -7,9 +7,9 @@ const centreSchema = new Schema({
     type: String,
     default: null
   },
-  ville: {
-    type: String,
-    default: null
+  ville_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ville"
   },
   region_id: {
     type: mongoose.Schema.Types.ObjectId,

@@ -3,7 +3,7 @@
 const Centre = require("../models/centre");
 
 
-exports.getAllRespos = async (req, res) => {
+exports.getAllCenter = async (req, res) => {
 
     Centre.find()
           .then(result => {
@@ -18,7 +18,7 @@ exports.getAllRespos = async (req, res) => {
 }
 
 
-exports.createCentre = async (req, res) => {
+/* exports.createCenter = async (req, res) => {
     
     const {
         nom,
@@ -43,7 +43,7 @@ exports.createCentre = async (req, res) => {
           .catch(err => {
             console.log(err);
           });
-}
+} */
 
 
 
