@@ -21,6 +21,7 @@ app.use(express.json());
 
 app.use('/api/user', require('./routes/beneficiary'));
 app.use('/api/resporegion', require('./routes/respo_region'));
+app.use('/api/admin_natinal', require('./routes/admin_national'));
 app.use('/api/region', require('./routes/region'));
 app.use('/api/ville', require('./routes/ville'));
 app.use('/api/centre', require('./routes/centre'));
