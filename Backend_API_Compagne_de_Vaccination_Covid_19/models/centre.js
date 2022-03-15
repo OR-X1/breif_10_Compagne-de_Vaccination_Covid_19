@@ -11,14 +11,6 @@ const centreSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "ville"
   },
-  region_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "region"
-  },
-  respo_region_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "respo_region"
-  },
 }, { timestamps: true });
 
 const centre = mongoose.model('centre', centreSchema);

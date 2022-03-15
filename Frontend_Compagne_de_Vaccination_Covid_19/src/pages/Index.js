@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 
+import Header from "../components/layouts/Header";
+import Footer from "../components/layouts/Footer";
+
 const Index = () => {
 
     return (
+<>
+<Header></Header>
 
-        
         <section class="banner">
         <div class="container">
             <div class="banner-content">
@@ -44,6 +48,9 @@ const Index = () => {
             </svg>
         </div>
     </section>
+    <Footer></Footer>
+</>
+        
     );
 }
 
