@@ -18,6 +18,7 @@ import ProtectedRouteRespo from "./ProtectedRoute/ProtectedRouteRespo";
 import Ville from "./pages/DashRespoRegion/Ville";
 import RespoRegion from "./pages/DashAdmin/RespoRegion";
 import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
+import Region from "./pages/DashAdmin/Region";
 
 function App() {
   return (
@@ -31,10 +32,11 @@ function App() {
           <Route  path="/vaccination"         element={<Vaccination/>}/>
 
           <Route  path="/dashregion"                   element={<ProtectedRouteAdmin><DashAdmin/></ProtectedRouteAdmin>}/>
+          <Route  path="/Region"                   element={<ProtectedRouteAdmin><Region/></ProtectedRouteAdmin>}/>
+          <Route  path="/resporegion"                   element={<ProtectedRouteAdmin><RespoRegion/></ProtectedRouteAdmin>}/>
 
           <Route  path="/conter"                   element={<ProtectedRouteRespo><Conter/></ProtectedRouteRespo>}/>
           <Route  path="/ville"                   element={<ProtectedRouteRespo><Ville/></ProtectedRouteRespo>}/>
-          <Route  path="/resporegion"                   element={<ProtectedRouteAdmin><RespoRegion/></ProtectedRouteAdmin>}/>
           <Route  path="/loginregion"                   element={<Login/>}/> 
           <Route  path="/loginadmin"                   element={<LoginAdmin/>}/> 
 

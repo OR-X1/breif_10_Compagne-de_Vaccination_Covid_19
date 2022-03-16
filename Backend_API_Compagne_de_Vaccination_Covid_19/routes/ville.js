@@ -7,6 +7,7 @@ const Cities = require('../controllers/ville')
 router.get('/allCities', Cities.getAllCities)
 router.post('/createCitie', Cities.createCity)
 router.get('/city/:id', Cities.getCity)
+router.get('/test/:id', Cities.test)
 router.get('/allCitiesInRegion/:region_id', Cities.getAllCitiesInRegion)
 
 

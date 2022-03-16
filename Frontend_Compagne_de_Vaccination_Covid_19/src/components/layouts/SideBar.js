@@ -39,6 +39,10 @@ const SideBar = () => {
                                             <Link to="/resporegion"><i class="sl sl-icon-user"></i>
                                                 Responsable region</Link>
                                         </li>
+                                        <li>
+                                            <Link to="/region"><i class="sl sl-icon-user"></i>
+                                            Region</Link>
+                                        </li>
             </>
             )
     }else if(decoded.role === "respo_region"){

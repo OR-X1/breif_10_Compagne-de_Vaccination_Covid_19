@@ -7,8 +7,10 @@ import SideBar from "../../components/layouts/SideBar";
 const Ville = () => {
 
     const [data, setDatas] = useState([]);
+    const [dataRegion, setDatasRegion] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+
 
 
     useEffect( () => {
@@ -31,37 +33,46 @@ const Ville = () => {
     },[]);
 
 
-    const [name_manager, setName_manager] = useState([]);
-    const [lastname_manager, setLastname_manager] = useState([]);
-    const [email_manager, setEmail_manager] = useState([]);
-    const [password_manager, setPassword_manager] = useState([]);
-    const [passwordconfirm, setPasswordconfirm] = useState([]);
+    useEffect( () => {
+        setTimeout(() => {
+        // fetch(`${process.env.REACT_APP_API_URL}manager/getAllmanagers`)
+        fetch('http://localhost:3000/api/region/allRegions')
+        .then(async response =>{
+            
+            const varr = await response.json()
+            
+            setDatasRegion(varr.result);
+            setIsLoading(false);
+            console.log(varr);
+        }).catch(err=>{
+            setIsLoading(false);
+            console.log('faild to fetch');
+        })
+
+        }, 1000);
+    },[]);
+
+
+    const [ville, setVille] = useState([]);
+    const [region, setRegion] = useState([]);
 
     const [isloadingsubmit, setIsLoadingsubmit] = useState(false);
+
+
 
 
     const handleSubmit = e => {
         e.preventDefault();
         setIsLoadingsubmit(true);
 
-        // const fd = new FormData();
-        // fd.append('name_manager',name_manager)
-        // fd.append('lastname_manager',lastname_manager)
-        // fd.append('email_manager',email_manager)
-        // fd.append('password_manager',password_manager)
-        // fd.append('passwordconfirm',passwordconfirm)
-
         const form_data = {
-            name_manager: name_manager,
-            lastname_manager: lastname_manager,
-            email_manager: email_manager,
-            password_manager: password_manager,
-            passwordconfirm: passwordconfirm,
+            ville: ville,
+            idregion: region,
           }
-        
+
         console.log(form_data);
         setTimeout(() => {
-        axios.post('http://localhost:3000/api/ville/allCities',form_data
+        axios.post('http://localhost:3000/api/ville/createCitie',form_data
             ).then(response => {
                 
                 if(response.data.result){
@@ -72,27 +83,12 @@ const Ville = () => {
                 }else{
                     console.log(response.data.msg);
                     setIsLoadingsubmit(false);
-                    //setError(response.data.msg)
+                    setError(response.data.msg)
                 }
-                
+                        
             }).catch(error =>{
                 
-                
                 console.log("error"+error);
-                // setIsLoadingsubmit(false);
-                // if(error.response.data.errors){
-                //     setErrorphoto(error.response.data.errors.photo)
-                //     setErrorname(error.response.data.errors.name_en)
-                //     setErrorcategory(error.response.data.errors.category)
-                //     setErrorprice(error.response.data.errors.price)
-                //     setErrorcurrency(error.response.data.errors.currency)
-                //     setErrordescription(error.response.data.errors.description_en)
-                //     setErroruser(error.response.data.errors.user_id)
-                //     setErroringredients(error.response.data.errors.ingredients_en)
-                   
-                // }else{
-                //     setErrorgenerale('something went wrong')
-                // }
             }
             )
         }, 1000);
@@ -173,24 +169,29 @@ const Ville = () => {
         <h5 class="modal-title" id="exampleModalLabel">New message</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+        <form onSubmit={handleSubmit}>
       <div class="modal-body">
 
-        <form onSubmit={handleSubmit}>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name"/>
+            <label for="recipient-name" class="col-form-label">ville:</label>
+            <input type="text" value={ville}  onChange={e => setVille(e.target.value)} class="form-control" id="recipient-name"/>
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-text" class="col-form-label">Region:</label>
+            <select value={region}  onChange={e => setRegion(e.target.value)} id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                {dataRegion.map((ithem) => (
+                <option key={ithem._id} value={ithem._id} >{ithem.region}</option> 
+                ))
+                } 
+            </select>
           </div>
-        </form>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit"  disabled={isloadingsubmit} class="btn btn-primary">{isloadingsubmit ? 'loading...' : 'Save Data'}</button>
       </div>
+        </form>
     </div>
   </div>
 </div>

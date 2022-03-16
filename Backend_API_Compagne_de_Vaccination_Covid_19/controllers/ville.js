@@ -19,10 +19,11 @@ exports.getAllCities = async (req, res) => {
 exports.getAllCitiesInRegion = async (req, res) => {
 
   const {
-    idregion
-  } = req.body
+    id,
+} = req.params
 
-  Ville.find({region_id : idregion})
+  console.log("id ree : ".id);
+  Ville.find({region_id : id})
         .then(result => {
           return res.status(200).json({
               msg: "fetch all data",
@@ -33,6 +34,8 @@ exports.getAllCitiesInRegion = async (req, res) => {
           console.log(err);
         });
 }
+
+
 
 
 exports.createCity = async (req, res) => {
@@ -67,8 +70,32 @@ exports.getCity = async (req, res) => {
       id,
   } = req.params
 
+  console.log(id);
   Ville.findOne({
     _id: id
+        })
+  // Manager.find()
+            .then(result => {
+              return res.status(200).json({
+                  msg: "fetch all data",
+                  result
+              })
+            })
+            .catch(err => {
+              console.log(err);
+            });
+}
+
+
+exports.test = async (req, res) => {
+
+  const {
+      id,
+  } = req.params
+
+  console.log(id);
+  Ville.find({
+    region_id: id
         })
   // Manager.find()
             .then(result => {
