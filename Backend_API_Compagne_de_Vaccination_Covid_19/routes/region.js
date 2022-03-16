@@ -5,6 +5,8 @@ const region = require('../controllers/region')
 
 // routes user
 router.get('/allRegions', region.getAllRegions)
+router.post('/createRegion', region.createRegion)
+router.get('/getRegion', region.getRegion)
 
 
 module.exports = router;
