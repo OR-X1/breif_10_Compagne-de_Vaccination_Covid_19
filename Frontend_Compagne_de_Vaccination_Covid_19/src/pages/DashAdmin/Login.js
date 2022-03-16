@@ -22,7 +22,7 @@ const Login = () => {
                 // axios.defaults.withCredentials = true;
                 // axios.get('http://localhost:8000/sanctum/csrf-cookie')
                 // .then(response => {
-                    axios.post('http://localhost:3000/api/resporegion/login', {
+                    axios.post('http://localhost:3000/api/admin_natinal/login', {
                         email: email,
                         password: password,
                     }).then(response => {

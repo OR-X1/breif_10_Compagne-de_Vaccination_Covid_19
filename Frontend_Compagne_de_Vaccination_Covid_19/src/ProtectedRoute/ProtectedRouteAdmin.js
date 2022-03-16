@@ -12,8 +12,8 @@ function ProtectedRouteAdmin({children}) {
     console.log(token);
     console.log(decoded);
     
-    if( decoded.role === "respo_region")return   children
-    return  <Navigate to="/loginregion"/>
+    if( decoded.role === "admin")return   children
+    return  <Navigate to="/loginadmin"/>
 
 }
 

@@ -11,10 +11,13 @@ import NotFound from "./pages/NotFound";
 import Vaccination from "./pages/Vaccination";
 
 import Login from "./pages/DashRespoRegion/Login";
+import LoginAdmin from "./pages/DashAdmin/Login";
 import DashAdmin from "./pages/DashRespoRegion/DashAdmin";
 import Conter from "./pages/DashRespoRegion/Conter";
 import ProtectedRouteRespo from "./ProtectedRoute/ProtectedRouteRespo";
 import Ville from "./pages/DashRespoRegion/Ville";
+import RespoRegion from "./pages/DashAdmin/RespoRegion";
+import ProtectedRouteAdmin from "./ProtectedRoute/ProtectedRouteAdmin";
 
 function App() {
   return (
@@ -27,11 +30,13 @@ function App() {
           <Route  path="/"         element={<Index/>}/>
           <Route  path="/vaccination"         element={<Vaccination/>}/>
 
-          <Route  path="/dashregion"                   element={<ProtectedRouteRespo><DashAdmin/></ProtectedRouteRespo>}/>
+          <Route  path="/dashregion"                   element={<ProtectedRouteAdmin><DashAdmin/></ProtectedRouteAdmin>}/>
 
           <Route  path="/conter"                   element={<ProtectedRouteRespo><Conter/></ProtectedRouteRespo>}/>
           <Route  path="/ville"                   element={<ProtectedRouteRespo><Ville/></ProtectedRouteRespo>}/>
+          <Route  path="/resporegion"                   element={<ProtectedRouteAdmin><RespoRegion/></ProtectedRouteAdmin>}/>
           <Route  path="/loginregion"                   element={<Login/>}/> 
+          <Route  path="/loginadmin"                   element={<LoginAdmin/>}/> 
 
           <Route  path="*"         element={<NotFound/>}/> 
         </Routes>

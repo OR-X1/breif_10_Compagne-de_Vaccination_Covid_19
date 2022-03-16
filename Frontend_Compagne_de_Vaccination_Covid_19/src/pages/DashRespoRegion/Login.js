@@ -49,7 +49,7 @@ const Login = () => {
                             // localStorage.setItem('auth_user', JSON.stringify(response.data.user))
                             setIsLoadingsubmit(false);
                             console.log("good");
-                            navigate('/dashregion')
+                            navigate('/conter')
                             }else{
                                 setIsLoadingsubmit(false);
                                 setError(response.data.err)

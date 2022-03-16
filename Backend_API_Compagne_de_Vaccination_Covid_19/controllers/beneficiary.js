@@ -24,7 +24,7 @@ exports.store = (req, res) => {
 
     // return res.status(200).json({
     //     msg: "fetch all data",
- 
+        
     // })
 
     const {
@@ -61,74 +61,47 @@ exports.store = (req, res) => {
             cin: cin,
           })
           .then(result => {
-            //   console.log(result);
+              console.log(result);
             if (result) {
-
-                if(result.doses[2].nbr_dose === "dose3"){
-                    return res.status(200).send({
-                        msg: "You already take dose 3",
-                    })
-                }else if(result.doses[1].nbr_dose === "dose2"){
-                    return res.status(200).send({
-                        msg: "You already take dose 2",
-                    })
-                }else if(result.doses[0].nbr_dose === "dose1"){
-                    return res.status(200).send({
-                        msg: "You already take dose 3",
-                    })
-                }
+                return res.status(200).send({
+                    msg: "You already regestred",
+                    res: result.doses[0].nbr_dose
+                })
             }else
-             if(nbr_dose == "dose1"){
-                 console.log(nbr_dose);
+            //  if(result.doses.nbr_dose == "dose1"){
 
-                    const beneficiary = new Beneficiary({
-                        cin: cin,
-                        tel: tel,
-                        email: email,
-                        adress: adress,
-                        doses: [{
-                            nbr_dose:nbr_dose,
-                            effect:effect
-                        }],
-                        malade: malade,
-                        traitement: traitement,
-                    })
-
-                    beneficiary.save()
-                        .then(result => {
-    
-                            let subj = "Your take dose";
-                            let msg = ` email : ${email}
-                                `;
-                            emailsend.mail(email, subj, msg)
-    
-                            console.log(result);
-                            return res.status(200).json({
-                                msg: "Add manager",
-                                result
-                            })
-                        })
-                        .catch(err => {
-                        console.log(err);
-                        });
-            }else if(nbr_dose == "dose2"){
-                    const Benefi =  Beneficiary.updateOne(
-                        { _id:id_chauffeur },
-                        {$push:{doses: [{
-                            nbr_dose:nbr_dose,
-                            effect:effect
-                        }],}}
-                      );
-                    
-            }else if(nbr_dose == "dose3")
+            // }else
             {
-                const Benefi =  Beneficiary.updateOne(
-                    { _id:id_chauffeur },
-                    {$push:{doses: [{
+                const beneficiary = new Beneficiary({
+                    cin: cin,
+                    tel: tel,
+                    email: email,
+                    adress: adress,
+                    doses: [{
                         nbr_dose:nbr_dose,
                         effect:effect
-                    }],}}
-                  );
+                    }],
+                    malade: malade,
+                    traitement: traitement,
+                })
+
+                beneficiary.save()
+                    .then(result => {
+
+                        let subj = "Your take dose";
+                        let msg = ` email : ${email}
+                            `;
+                        emailsend.mail(email, subj, msg)
+
+                        console.log(result);
+                        return res.status(200).json({
+                            msg: "Add manager",
+                            result
+                        })
+                    })
+                    .catch(err => {
+                    console.log(err);
+                    });
             } 
             // else if (password_chauffeur !== passwordconfirm) {
             //     return res.status(200).send({
@@ -145,4 +118,6 @@ exports.store = (req, res) => {
 
 
 }
+
+
 

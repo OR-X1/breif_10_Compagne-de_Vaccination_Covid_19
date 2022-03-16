@@ -14,7 +14,7 @@ const RespoRegion = () => {
     useEffect( () => {
         setTimeout(() => {
         // fetch(`${process.env.REACT_APP_API_URL}manager/getAllmanagers`)
-        fetch('http://localhost:3000/api/centre/allCentres')
+        fetch('http://localhost:3000/api/resporegion/allRespos')
         .then(async response =>{
             
             const varr = await response.json()
@@ -61,7 +61,7 @@ const RespoRegion = () => {
         
         console.log(form_data);
         setTimeout(() => {
-        axios.post('http://localhost:3000/api/manager/create_manager',form_data
+        axios.post('http://localhost:3000/api/resporegion/allRespos',form_data
             ).then(response => {
                 
                 if(response.data.result){
@@ -137,20 +137,33 @@ const RespoRegion = () => {
                                             <table class="basic-table table table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>Center</th>
+                                                        <th>nom</th>
+                                                        <th>prenom</th>
+                                                        <th>cin</th>
+                                                        <th>tele</th>
+                                                        <th>email</th>
                                                         <th>ville</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 {data.map((ithem) => (
                                                     <tr key={ithem._id}>
-                                                        <td>{ithem.centre}</td>
+                                                        <td>{ithem.nom}</td>
                                                         <td>
-                                                            <span class="txt-success"><span>{ithem.ville_id}</span></span>
+                                                            <span class="txt-success"><span>{ithem.prenom}</span></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="txt-success"><span>{ithem.cin}</span></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="txt-success"><span>{ithem.tele}</span></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="txt-success"><span>{ithem.email}</span></span>
                                                         </td>
                                                     </tr>
                                                     )) 
-                                                } 
+                                                }
                                                 </tbody>
                                             </table>
                                         </div>

@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import jwt_decode from "jwt-decode";
+
 const SideBar = () => {
 
+    const token = localStorage.getItem('auth_token');
+    var decoded = jwt_decode(token);
     
     let navigate= useNavigate();
 
@@ -22,6 +26,33 @@ const SideBar = () => {
     //   console.log("error logout");
     // })
   }
+
+
+  let authbnts = ''
+    if(decoded.role === "admin"){
+        authbnts= (
+            <>
+                <li class="active">
+                                            <Link to="/dashregion"><i class="sl sl-icon-settings"></i> Dashboard</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/resporegion"><i class="sl sl-icon-user"></i>
+                                                Responsable region</Link>
+                                        </li>
+            </>
+            )
+    }else if(decoded.role === "respo_region"){
+        authbnts= (
+        <>
+        <li>
+                                            <Link to="/conter"><i class="sl sl-icon-layers"></i> Center</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/ville"><i class="sl sl-icon-layers"></i> Ville</Link>
+                                        </li>
+        </>
+        )
+    }
 
     return (
 
@@ -46,19 +77,9 @@ const SideBar = () => {
                             <div class="dashboard-nav">
                                 <div class="dashboard-nav-inner">
                                     <ul>
-                                        <li class="active">
-                                            <Link to="/dashregion"><i class="sl sl-icon-settings"></i> Dashboard</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/dashregion"><i class="sl sl-icon-user"></i>
-                                                Responsable region</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/conter"><i class="sl sl-icon-layers"></i> Center</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/ville"><i class="sl sl-icon-layers"></i> Ville</Link>
-                                        </li>
+                                    
+                                    {authbnts}
+                                        
                                         <li>
                                             <a href="#" onClick={handleLogout}><i class="sl sl-icon-power"></i> Logout</a>
                                         </li>
